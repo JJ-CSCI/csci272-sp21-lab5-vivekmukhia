@@ -3,8 +3,79 @@
 //------------------------------
 #include "catch.hpp"
 //------------------------------
+class Real
+{
+private :
+    double real;
+public:
+    
+    Real(double r)
+    {
+        real = r;
+    }
+    
+    double GetReal() const 
+    { 
+        return real; 
+    }
+    
+    Real operator*(double v)
+    {
+        Real obj(real * v);
+        return obj;
+    }
+}; 
 
-// Write the assignment code here
+
+class Complex : public Real
+{
+private :
+    double imaginary; 
+public:
+    
+    
+    Complex(double r, double i) : Real(r), imaginary(i)
+    {
+        
+    }
+    
+    
+    double GetImaginary() const
+    {
+        return imaginary;
+    }
+
+    Complex operator*(double v)
+    {
+        Complex obj(GetReal() * v, imaginary * v);
+        return obj;
+    }
+}; 
+
+
+
+class Surreal : public Complex
+{
+private :
+    double surreal;
+public:
+    
+    Surreal(double a, double b, double c) : Complex(a, b), surreal(c)
+    {
+
+    }
+    
+    double GetSurreal()
+    {
+        return surreal;
+    } 
+    
+    Surreal operator*(double v)
+    {
+        Surreal obj(GetReal() * v, GetImaginary() * v, surreal * v);
+        return obj;
+    }
+};
 
 
 //------------------------------
