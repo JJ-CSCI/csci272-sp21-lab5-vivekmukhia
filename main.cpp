@@ -3,63 +3,80 @@
 //------------------------------
 #include "catch.hpp"
 //------------------------------
-double Real;
+class Real
 {
-private:
-double re;
+private :
+    double real;
 public:
-Real(double r): re(r)
-{}
-
-double GetReal() const {return re;}
-Real operator+(double v)
-{
-return Real(re + v);
-}
-
+    
+    Real(double r)
+    {
+        real = r;
+    }
+    
+    double GetReal() const 
+    { 
+        return real; 
+    }
+    
+    Real operator*(double v)
+    {
+        Real obj(real * v);
+        return obj;
+    }
 }; 
 
 
 class Complex : public Real
 {
-private:
-double im; 
+private :
+    double imaginary; 
 public:
-Complex(double r, double i) : Real(r), im(i) 
-{}
+    
+    
+    Complex(double r, double i) : Real(r), imaginary(i)
+    {
+        
+    }
+    
+    
+    double GetImaginary() const
+    {
+        return imaginary;
+    }
 
-double GetImaginary() const
-{
-return im;
-}
-
-Complex operator+(double v)
-{
-return Complex(GetReal()+v, im+v);
-}
-
+    Complex operator*(double v)
+    {
+        Complex obj(GetReal() * v, imaginary * v);
+        return obj;
+    }
 }; 
 
-class Surreal: public Complex
+
+
+class Surreal : public Complex
 {
-private:
-double sur;
+private :
+    double surreal;
 public:
-Surreal(double a, double b, double c) : Complex(a, b), sur(c)  
-{}
+    
+    Surreal(double a, double b, double c) : Complex(a, b), surreal(c)
+    {
 
-double GetSurreal()
-{
-return sur;
-}
+    }
+    
+    double GetSurreal()
+    {
+        return surreal;
+    } 
+    
+    Surreal operator*(double v)
+    {
+        Surreal obj(GetReal() * v, GetImaginary() * v, surreal * v);
+        return obj;
+    }
+};
 
-
-Surreal operator+(double v)
-{
-return Surreal(GetReal()+v, GetImaginary()+v, sur+v);
-}
-
-}; 
 
 //------------------------------
 //   DO NOT MODIFY TEST CASES
